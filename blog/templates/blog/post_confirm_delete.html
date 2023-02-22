@@ -1,0 +1,21 @@
+{% extends 'blog/home.html' %}
+{% comment %} {% load crispy_forms_tags %}  {% endcomment %}
+<!-- For Using Crispy Forms Tags -->
+
+{% block body %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Post</legend>
+                <h2>Are You Sure You Want to Delete this Post - "{{ object.title }}" </h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                {% comment %} Need To Configure Success Url - Because deleting without providing the success url will raise an error {% endcomment %}
+                <a class="btn btn-outline-secondary" href ="{% url 'post-detail' object.id %}">No, Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock body %}
+    

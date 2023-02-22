@@ -1,0 +1,31 @@
+{% extends 'blog/home.html' %}
+{% load crispy_forms_tags %}
+<!-- For Using Crispy Forms Tags -->
+
+{% block body %}
+{% comment %}
+Now Setup Urls
+{% endcomment %}
+<div class="content-section">
+    <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p class="text-secondary">{{ user.email }}</p>
+        </div>
+    </div>
+    <!-- Form Here -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Profile Information</legend>
+            {{ userUpdateForm |crispy}} <!-- filter crisply used to customize the form in the better way -->
+            {{ profileUpdateForm |crispy}}<br> <!-- filter crisply used to customize the form in the better way -->
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}
